@@ -6,11 +6,16 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'title': 'Домашняя страница',
-        'content': 'куча текста, который мы придумали'
+        'title': 'Главная страница',
+        'content': 'Baks Hi-Tech store'
     }
     return render(request, 'baseitem/index.html', context)
 
 def about(request):
-    return HttpResponse("Сайт дорабатываем")
+    context = {
+        'title': 'Страница о сайте',
+        'content': 'Данный сайт создан потому, что был создан.',
+        'text_on_page': 'куча странного текста',
+    }
+    return render(request, 'baseitem/about.html', context)
 

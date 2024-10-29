@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'social_django',
     'captcha',
-    'baseitems'
+    'baseitems.apps.BaseitemsConfig'
 
 ]
 

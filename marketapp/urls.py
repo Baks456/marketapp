@@ -19,9 +19,10 @@ from django.urls import path, include
 
 from baseitems import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('baseitems.urls')),
+    path('', include('baseitems.urls', namespace='baseitems')),
     path("__debug__/", include("debug_toolbar.urls")),
 
 ]
