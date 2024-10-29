@@ -23,7 +23,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'baseitems:index' %}">Home</a>
+                <a class="navbar-brand" href="{% url 'baseitems:home' %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
                                 <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
                                 <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="#">Админ панель</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -86,13 +86,14 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Системные блоки</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Мониторы</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Ноутбуки</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Видеокарты</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Системы охлаждения</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Переферия</a></li>
+
+                        {% if categories %}
+                            {% for cat in categories %}
+                        <li><a class="dropdown-item text-white" href="{% url 'goods:catalog' %}">{{   cat.name }}</a></li>
+
+                            {% endfor %}
+                        {% endif %}
+
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->

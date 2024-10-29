@@ -5,7 +5,7 @@ from baseitems import views
 
 app_name = 'baseitems'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='home'),
     path('about/', views.about, name='about'),
 
 ]
