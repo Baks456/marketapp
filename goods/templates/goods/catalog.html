@@ -47,9 +47,8 @@
         </div>
 
 
-        {% for good in goods %}
-
             <!-- Карта товара -->
+        {% for good in goods %}
             <div class="col-lg-4 col-md-6 p-4">
                 <div class="card border-primary rounded custom-shadow">
                     {% if good.image %}
@@ -58,7 +57,7 @@
                         <img src="{% static 'deps/images/no image.png' %}" class="card-img-top" alt="...">
                     {% endif %}
                     <div class="card-body">
-                        <a href="../goods/product.html">
+                        <a href="{%  url 'catalog:product' good.slug %}">
                             <p class="card-title">{{ good.name }}</p>
                         </a>
                         <p class="card-text text-truncate">{{ good.description }}</p>
@@ -79,8 +78,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Карта товара -->
         {% endfor %}
+            <!-- Карта товара -->
 
 
     </div>

@@ -9,17 +9,22 @@
                 <!-- Пустой блок на усмотрение -->
             </div>
             <div class="col-lg-10">
+
                 <!-- Контент на странице -->
                 <div class="container mt-5">
                     <div class="card mb-4 custom-shadow">
                         <div class="row">
-                            <!-- Миниатюры -->
                             <div class="col-md-4">
-                                <img src="{% static 'deps/images/goods/ASUS Zenbook 15 OLED.png' %}"
-                                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
-                            </div>
+                                    {% if good.image %}
+                                    <img src="{{ good.image.url }}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                                    {% else %}
+                                        <img src="{% static 'deps/images/no image.png' %}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                                    {% endif %}
+                                </div>
+                            <!-- Миниатюры -->
+
                             <div class="col-md-4 ">
-                                <p class="product_id mt-3">id: 2</p>
+                                <p class="product_id mt-3">id: {{ good.display_id}} </p>
                             </div>
                             <!-- Увеличить изображение в модальном окне -->
                             <div class="modal fade" id="imageModal1" tabindex="-1"
@@ -27,13 +32,16 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="imageModal1Label">Изображение 1</h5>
+                                            <h5 class="modal-title" id="imageModal1Label">{{ good.name}}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Закрыть"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <img src="{% static 'deps/images/goods/ASUS Zenbook 15 OLED.png' %}"
-                                                 class="img-fluid" alt="Изображение 1">
+                                            {% if good.image %}
+                                            <img src="{{ good.image.url }}" class="img-fluid" alt="Изображение 1">
+                                                {% else %}
+                                            <img src="{% static 'deps/images/no image.png' %}" class="img-fluid" alt="Изображение 1">
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -41,21 +49,9 @@
                         </div>
                         <!-- Описание товара -->
                         <div class="card-body">
-                            <p class="card-text">Цена: <strong>1200.00 $</strong></p>
-                            <h5 class="card-title">15.6" Ноутбук ASUS ZenBook 15 OLED UM3504DA-MA304 серый</h5>
-                            <p class="card-text">Ноутбук ASUS ZenBook 15 OLED UM3504DA-MA304 выделяется элегантным
-                                оформлением и производительностью. Он изготовлен в серебристом металлическом корпусе с
-                                отделкой из алюмооксидной керамики, весом 1.4 кг и толщиной 14.9 мм. Антимикробное
-                                покрытие Guard Plus защищает от передачи вирусов и бактерий при контакте с поверхностями
-                                ноутбука. На экране 15.6 дюймов OLED FullHD с режимом защиты зрения выводится
-                                реалистичная картинка. Сертификация Pantone обеспечивает точную передачу цветовой
-                                палитры.
-                                Аппаратная платформа ASUS ZenBook 15 OLED UM3504DA-MA304 с процессором AMD Ryzen 7 7735U
-                                позволяет продуктивно справляться с созданием документов, поиском информации в сети
-                                Интернет, просмотром мультимедиа. Клавиатура с белой подсветкой LED и влагозащищенной
-                                конструкцией обеспечивает удобство работы в программах. Аудиосистема от Harman Kardon с
-                                эффектами Dolby Atmos помогает погрузиться в объемное звучание. Инфракрасная
-                                FullHD-камера с технологией шумоподавления гарантирует четкость видеосвязи.</p>
+                            <p class="card-text">Цена: <strong>{{ good.real_price }} $</strong></p>
+                            <h5 class="card-title">{{ good.name }}</h5>
+                            <p class="card-text">{{ good.description }}</p>
                             <a href="#" class="btn btn-dark add-to-cart">Добавить в корзину</a>
                         </div>
                     </div>
