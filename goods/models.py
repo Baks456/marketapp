@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -17,7 +18,7 @@ class Categories(models.Model):
         verbose_name_plural = "Категории"
 
     def __str__(self):
-        return f'{self.name}  - {self.sort_level}'
+        return f'{self.name}  - {self.sort_level} приоритет сортировки'
 
 
 class Products(models.Model):
@@ -27,7 +28,7 @@ class Products(models.Model):
     image = models.ImageField(upload_to='goods_images/%Y/%m/%d/', default=None, blank=True, null=True,
                               verbose_name='Изображение товара')
     price = models.DecimalField(default=1000000, max_digits=12, decimal_places=2, verbose_name='Цена')
-    discount = models.DecimalField(default=0.0, max_digits=5, decimal_places=2, verbose_name='Скидка в %')
+    discount = models.DecimalField(default=0.0, max_digits=4, decimal_places=2, verbose_name='Скидка в %', validators=[MinValueValidator(0), MaxValueValidator(100)])
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='Категория')
 
@@ -37,5 +38,13 @@ class Products(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+
+    def display_id(self):
+        return f'{self.id:06}'
+
+    def real_price(self):
+        if self.discount:
+            return round((self.price - self.price*self.discount/100), 2)
+        return self.price
 
 
