@@ -86,7 +86,7 @@
     <!-- Пагинация -->
 
     <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center my-4">
+        <ul class="pagination justify-content-center my-4 mt-auto">
             <div class="custom-shadow d-flex rounded">
                 {% if goods.has_previous %}
                     <li class="page-item">
@@ -125,8 +125,8 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="py-4 bg-dark">
+    <footer class="mt-auto py-3 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
+            <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
         </div>
     </footer> {% endblock %}

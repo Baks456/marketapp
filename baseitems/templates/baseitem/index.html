@@ -2,12 +2,13 @@
 {%  load static %}
 
 <!-- Стиль footer-a для главной страницы -->
-{% block extra_css %}<link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}"> {% endblock %}
+
 <!-- Favicons for different platforms -->
 
 {% block content %} <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1> {% endblock %}
-{% block footer %}<footer class="py-4 bg-dark">
+{% block footer %}
+    <footer class="mt-auto py-3 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
+            <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
         </div>
     </footer> {% endblock %}
