@@ -5,11 +5,11 @@ from goods.models import Categories, Products
 
 
 def catalog(request):
-    categories = Categories.objects.all().order_by('-sort_level', 'name')
+
     goods = Products.objects.all().order_by('-price')
     context = {
         'title': 'Каталог товаров',
-        'categories': categories,
+
         'goods': goods,
     }
     return render(request, 'goods/catalog.html', context)

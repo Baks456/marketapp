@@ -28,7 +28,7 @@ class Products(models.Model):
     image = models.ImageField(upload_to='goods_images/%Y/%m/%d/', default=None, blank=True, null=True,
                               verbose_name='Изображение товара')
     price = models.DecimalField(default=1000000, max_digits=12, decimal_places=2, verbose_name='Цена')
-    discount = models.DecimalField(default=0.0, max_digits=4, decimal_places=2, verbose_name='Скидка в %', validators=[MinValueValidator(0), MaxValueValidator(100)])
+    discount = models.DecimalField(default=0.0, max_digits=5, decimal_places=2, verbose_name='Скидка в %', validators=[MinValueValidator(0), MaxValueValidator(100)])
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='Категория')
 
