@@ -18,7 +18,7 @@ class Categories(models.Model):
         verbose_name_plural = "Категории"
 
     def __str__(self):
-        return f'{self.name}  - {self.sort_level} приоритет сортировки'
+        return f'{self.name}'
 
 
 class Products(models.Model):
@@ -33,7 +33,7 @@ class Products(models.Model):
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='Категория')
 
     def __str__(self):
-        return f'{self.name} количество {self.quantity}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = "Продукт"

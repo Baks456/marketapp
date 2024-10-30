@@ -2,8 +2,6 @@
 {% load static %}
 
 
-{#{% block extra_css %}<link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}"> {% endblock %}#}
-
 {% block content %}
     <!-- Контент на странице -->
     <div class="row">
@@ -45,8 +43,6 @@
                 <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
             </form>
         </div>
-
-
         <!-- Карта товара -->
         {% for good in goods %}
             <div class="col-lg-4 col-md-6 p-4">
@@ -80,11 +76,8 @@
             </div>
         {% endfor %}
         <!-- Карта товара -->
-
-
     </div>
     <!-- Пагинация -->
-
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center my-4 mt-auto">
             <div class="custom-shadow d-flex rounded">
@@ -125,8 +118,12 @@
 {% endblock %}
 
 {% block footer %}
+
+
     <footer class="mt-auto py-3 bg-dark">
         <div class="container">
             <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
         </div>
-    </footer> {% endblock %}
+    </footer>
+
+{% endblock %}
