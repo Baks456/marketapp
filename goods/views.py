@@ -6,12 +6,20 @@ from goods.models import Products
 
 
 def catalog(request, cat_slug):
-    if cat_slug == 'all':
-        goods = get_list_or_404( Products.objects.order_by('-price'))
-    else:
-        goods = get_list_or_404(Products.objects.filter(category__slug=cat_slug))
     page = request.GET.get('page', 1)
-    paginator = Paginator(goods, 3)
+    on_sale = request.GET.get('on_sale', None)
+    order = request.GET.get('order', None)
+
+    if cat_slug == 'all':
+        goods = Products.objects.order_by('-price')
+    else:
+        goods = Products.objects.filter(category__slug=cat_slug)
+    if on_sale:
+        goods = goods.filter(discount__gt=0)
+    if order and order != 'default':
+        goods = goods.order_by(order)
+
+    paginator = Paginator(goods, 6)
     curr_page = paginator.page(page)
     context = {
         'title': 'Каталог товаров',
