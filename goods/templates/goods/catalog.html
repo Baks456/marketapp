@@ -78,52 +78,92 @@
         <!-- Карта товара -->
     </div>
     <!-- Пагинация -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center my-4 mt-auto">
-            <div class="custom-shadow d-flex rounded">
-                {% if goods.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ goods.previous_page_number }}">Назад</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link">Назад</a>
-                    </li>
-                {% endif %}
-
-                {% for page in goods.paginator.page_range %}
-                    {% if page >= goods.number|add:-2  and page <= goods.number|add:2 %}
-                        <li class="page-item {% if goods.number == page %}active{% endif %}"><a class="page-link"
-                                                                                                href="?page={{ page }}">{{ page }}</a>
-                        </li>
-                    {% endif %}
-
-                {% endfor %}
-
-                {% if goods.has_next %}
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="?page={{ goods.next_page_number }}">Вперед</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link">Вперед</a>
-                    </li>
-                {% endif %}
-
-            </div>
-        </ul>
-    </nav>
+    {#    <nav aria-label="Page navigation example">#}
+    {#        <ul class="pagination justify-content-center my-4 mt-auto">#}
+    {#            <div class="custom-shadow d-flex rounded">#}
+    {#                {% if goods.has_previous %}#}
+    {#                    <li class="page-item">#}
+    {#                        <a class="page-link" href="?page={{ goods.previous_page_number }}">Назад</a>#}
+    {#                    </li>#}
+    {#                {% else %}#}
+    {#                    <li class="page-item disabled">#}
+    {#                        <a class="page-link">Назад</a>#}
+    {#                    </li>#}
+    {#                {% endif %}#}
+    {##}
+    {#                {% for page in goods.paginator.page_range %}#}
+    {#                    {% if page >= goods.number|add:-2  and page <= goods.number|add:2 %}#}
+    {#                        <li class="page-item {% if goods.number == page %}active{% endif %}"><a class="page-link"#}
+    {#                                                                                                href="?page={{ page }}">{{ page }}</a>#}
+    {#                        </li>#}
+    {#                    {% endif %}#}
+    {##}
+    {#                {% endfor %}#}
+    {##}
+    {#                {% if goods.has_next %}#}
+    {#                    <li class="page-item">#}
+    {#                        <a class="page-link"#}
+    {#                           href="?page={{ goods.next_page_number }}">Вперед</a>#}
+    {#                    </li>#}
+    {#                {% else %}#}
+    {#                    <li class="page-item disabled">#}
+    {#                        <a class="page-link">Вперед</a>#}
+    {#                    </li>#}
+    {#                {% endif %}#}
+    {##}
+    {#            </div>#}
+    {#        </ul>#}
+    {#    </nav>#}
 
 {% endblock %}
 
 {% block footer %}
+    <!-- Пагинация -->
 
+    <div class="mt-auto">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <div class="custom-shadow d-flex rounded">
+                    {% if goods.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ goods.previous_page_number }}">Назад</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">Назад</a>
+                        </li>
+                    {% endif %}
 
-    <footer class="mt-auto py-3 bg-dark">
-        <div class="container">
-            <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
-        </div>
-    </footer>
+                    {% for page in goods.paginator.page_range %}
+                        {% if page >= goods.number|add:-2  and page <= goods.number|add:2 %}
+                            <li class="page-item {% if goods.number == page %}active{% endif %}"><a class="page-link"
+                                                                                                    href="?page={{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if goods.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?page={{ goods.next_page_number }}">Вперед</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">Вперед</a>
+                        </li>
+                    {% endif %}
+
+                </div>
+            </ul>
+        </nav>
+        <!-- Пагинация -->
+
+        <footer class="mt-auto py-1 bg-dark">
+            <div class="container">
+                <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
+            </div>
+        </footer>
+    </div>
 
 {% endblock %}
