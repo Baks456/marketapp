@@ -43,7 +43,7 @@ class Products(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        ordering = ['-price', 'name']
+        ordering = ['-price', 'name',]
 
     def display_id(self):
         return f'{self.id:06}'
