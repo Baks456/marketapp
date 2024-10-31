@@ -53,7 +53,7 @@
                         <img src="{% static 'deps/images/no image.png' %}" class="card-img-top" alt="...">
                     {% endif %}
                     <div class="card-body">
-                        <a href="{% url 'catalog:product' good.slug %}">
+                        <a href="{{  good.get_absolute_url }}">
                             <p class="card-title">{{ good.name }}</p>
                         </a>
                         <p class="card-text">{{ good.description|truncatechars:100 }}</p>
@@ -77,43 +77,7 @@
         {% endfor %}
         <!-- Карта товара -->
     </div>
-    <!-- Пагинация -->
-    {#    <nav aria-label="Page navigation example">#}
-    {#        <ul class="pagination justify-content-center my-4 mt-auto">#}
-    {#            <div class="custom-shadow d-flex rounded">#}
-    {#                {% if goods.has_previous %}#}
-    {#                    <li class="page-item">#}
-    {#                        <a class="page-link" href="?page={{ goods.previous_page_number }}">Назад</a>#}
-    {#                    </li>#}
-    {#                {% else %}#}
-    {#                    <li class="page-item disabled">#}
-    {#                        <a class="page-link">Назад</a>#}
-    {#                    </li>#}
-    {#                {% endif %}#}
-    {##}
-    {#                {% for page in goods.paginator.page_range %}#}
-    {#                    {% if page >= goods.number|add:-2  and page <= goods.number|add:2 %}#}
-    {#                        <li class="page-item {% if goods.number == page %}active{% endif %}"><a class="page-link"#}
-    {#                                                                                                href="?page={{ page }}">{{ page }}</a>#}
-    {#                        </li>#}
-    {#                    {% endif %}#}
-    {##}
-    {#                {% endfor %}#}
-    {##}
-    {#                {% if goods.has_next %}#}
-    {#                    <li class="page-item">#}
-    {#                        <a class="page-link"#}
-    {#                           href="?page={{ goods.next_page_number }}">Вперед</a>#}
-    {#                    </li>#}
-    {#                {% else %}#}
-    {#                    <li class="page-item disabled">#}
-    {#                        <a class="page-link">Вперед</a>#}
-    {#                    </li>#}
-    {#                {% endif %}#}
-    {##}
-    {#            </div>#}
-    {#        </ul>#}
-    {#    </nav>#}
+
 
 {% endblock %}
 

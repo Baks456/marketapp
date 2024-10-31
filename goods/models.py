@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse_lazy
 
 from baseitems.extramethods import slug_from_rus_to_eng
 
@@ -16,9 +17,13 @@ class Categories(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+        ordering = ['-sort_level', 'name']
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        return reverse_lazy('goods:catalog', kwargs={'cat_slug': self.slug})
 
 
 class Products(models.Model):
@@ -47,5 +52,8 @@ class Products(models.Model):
         if self.discount:
             return round((self.price - self.price*self.discount/100), 2)
         return self.price
+
+    def get_absolute_url(self):
+        return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
 
 
