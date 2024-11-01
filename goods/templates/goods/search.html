@@ -14,41 +14,49 @@
             </button>
 
 
-            <form action="{% url 'catalog:catalog' cat_slug %}" method="get" class="dropdown-menu bg-dark"
-                  data-bs-theme="dark">
+            <form action="{% url 'catalog:search' %}" method="get" class="dropdown-menu bg-dark"
+                      data-bs-theme="dark">
 
-                <div class="form-check text-white mx-3">
-                    <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on"
-                           {% if request.GET.on_sale == 'on' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Товары по акции
-                    </label>
-                </div>
-                <p class="text-white mx-3 mt-3">Сортировать:</p>
-                <div class="form-check text-white mx-3">
-                    <input class="form-check-input" type="radio" name="order" id="flexRadioDefault1" value="default"
-                           {% if request.GET.order == 'default' or request.GET.order == None %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        По умолчанию
-                    </label>
-                </div>
-                <div class="form-check text-white mx-3">
-                    <input class="form-check-input" type="radio" name="order" id="flexRadioDefault2" value="price"
-                           {% if request.GET.order == 'price' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        От дешевых к дорогим
-                    </label>
-                </div>
-                <div class="form-check text-white mx-3">
-                    <input class="form-check-input" type="radio" name="order" id="flexRadioDefault3" value="-price"
-                           {% if request.GET.order == '-price' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        От дорогих к дешевым
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on"
+                       {% if request.GET.on_sale == 'on' %}checked{% endif %}>
+                {% if request.GET.q %}
+                    <input type="hidden" name="q" value="{{ request.GET.q }}">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckDefault">
+                    Товары по акции
+                </label>
+            </div>
+            <p class="text-white mx-3 mt-3">Сортировать:</p>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order" id="flexRadioDefault1" value="default"
+                       {% if request.GET.order == 'default' or request.GET.order == None %}checked{% endif %}>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    По умолчанию
+                </label>
+            </div>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order" id="flexRadioDefault2" value="price"
+                       {% if request.GET.order == 'price' %}checked{% endif %}>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    От дешевых к дорогим
+                </label>
+            </div>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order" id="flexRadioDefault3" value="-price"
+                       {% if request.GET.order == '-price' %}checked{% endif %}>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    От дорогих к дешевым
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
             </form>
         </div>
+        <h3 class="mt-4">Результаты поиска по запросу <span style="background-color: yellow">{{ request.GET.q }}</span></h3>
+        {%  if not goods %}
+
+        <h3 class="mt-4">Ничего не найдено</h3>
+        {% endif %}
         <!-- Карта товара -->
         {% for good in goods %}
             <div class="col-lg-4 col-md-6 p-4">
@@ -60,9 +68,9 @@
                     {% endif %}
                     <div class="card-body">
                         <a href="{{ good.get_absolute_url }}">
-                            <p class="card-title">{{ good.name }}</p>
+                            <p class="card-title">{% autoescape off %} {{ good.headline }}{%  endautoescape %}</p>
                         </a>
-                        <p class="card-text">{{ good.description|truncatechars:100 }}</p>
+                        <p class="card-text">{% autoescape off %}{{ good.bodyline|truncatechars:100 }}{%  endautoescape %}</p>
                         <p class="product_id">id: {{ good.display_id }}</p>
                         <div class="d-flex justify-content-between">
                             {% if good.discount %}

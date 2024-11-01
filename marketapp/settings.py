@@ -39,10 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'django_extensions',
+
     'debug_toolbar',
     'social_django',
     'captcha',
+
     'baseitems.apps.BaseitemsConfig',
     'goods.apps.GoodsConfig',
     'users.apps.UsersConfig',
