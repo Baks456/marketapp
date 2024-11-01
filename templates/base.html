@@ -22,6 +22,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <header>
+
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'baseitems:home' %}">Home</a>
@@ -46,9 +47,15 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="carts/cart.html">Корзина</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  text-white" href="{% url 'user:login' %}">Войти</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'user:profile' %}">{{ user.username }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'user:login' %}">Войти</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,10 +67,18 @@
                             </li>
                             <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a>
                             </li>
+                            {% if user.is_authenticated %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item  text-white" href=""{% url "user:logout" %}>Выйти</a></li>
+                                <li>
+                                    <form action="{% url 'user:logout' %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="dropdown-item  text-white" type="submit">Выйти</button>
+                                    </form>
+
+                                </li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
@@ -92,7 +107,7 @@
                     {% show_category as categories %}
                     {% if categories %}
                         {% for cat in categories %}
-                            <li><a class="dropdown-item text-white" href="{{cat.get_absolute_url}}">{{ cat.name }}</a>
+                            <li><a class="dropdown-item text-white" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                             </li>
                         {% endfor %}
                     {% endif %}

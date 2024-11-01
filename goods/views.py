@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render
 
 # Create your views here.
 from goods.models import Products
@@ -11,8 +11,7 @@ def catalog(request, cat_slug=None):
     on_sale = request.GET.get('on_sale', None)
     order = request.GET.get('order', None)
 
-
-    if cat_slug == 'all':
+    if cat_slug == 'all' or cat_slug is None:
         goods = Products.objects.order_by('-price')
     else:
         goods = Products.objects.filter(category__slug=cat_slug)
@@ -29,6 +28,7 @@ def catalog(request, cat_slug=None):
         'cat_slug': cat_slug,
     }
     return render(request, 'goods/catalog.html', context)
+
 
 def search(request, cat_slug=None):
     page = request.GET.get('page', 1)
@@ -55,8 +55,6 @@ def search(request, cat_slug=None):
         'cat_slug': cat_slug,
     }
     return render(request, 'goods/search.html', context)
-
-
 
 
 def product(request, product_slug):

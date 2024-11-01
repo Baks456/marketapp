@@ -32,7 +32,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-
+    # 'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,7 +148,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'baseitems:home'
 LOGIN_URL = 'users:login'
 
 AUTHENTICATION_BACKENDS = [
@@ -159,6 +159,11 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = 'users.User'
 DEFAULT_USER_IMAGE = MEDIA_URL + 'users/default.png'
+
+
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'baseitems:home'
+LOGOUT_REDIRECT_URL = 'baseitems:home'
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
@@ -192,6 +197,10 @@ SOCIAL_AUTH_PIPELINE = (
     'users.pipeline.new_users_handler',
 )
 
-LOGIN_REDIRECT_URL = 'home'
+
 
 SITE_ID = 1
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}

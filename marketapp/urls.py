@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('catalog/', include('goods.urls', namespace='catalog')),
     path('user/', include('users.urls', namespace='user')),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if DEBUG :
