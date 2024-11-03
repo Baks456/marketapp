@@ -1,14 +1,40 @@
-from django.contrib import auth
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, RegisterUserForm
 
 
 # Create your views here.
 
+
+class LoginUser(LoginView):
+    template_name = 'users/login.html'
+    form_class = UserLoginForm
+    extra_context = {'title': 'Авторизация'}
+
+    def get_success_url(self):
+        return reverse_lazy('catalog:catalog', kwargs={'cat_slug': 'all'})
+
+
+def profile(request):
+    context = {
+        'title': 'Профиль пользователя',
+
+    }
+    return render(request, 'users/profile.html', context)
+
+
+class RegisterUser(CreateView):
+    template_name = 'users/registration.html'
+    form_class = RegisterUserForm
+    extra_context = {'title': 'Регистрация'}
+    success_url = reverse_lazy('users:login')
+
+# def user_logout(request):
+#     auth.logout(request)
 
 # def user_login(request):
 #     if request.method == 'POST':
@@ -28,30 +54,9 @@ from users.forms import UserLoginForm
 #                }
 #     return render(request, 'users/login.html', context)
 
-
-class LoginUser(LoginView):
-    template_name = 'users/login.html'
-    form_class = UserLoginForm
-    extra_context = {'title': 'Авторизация'}
-
-    # def get_success_url(self):
-    #     return reverse_lazy('baseitems:home')
-
-
-def profile(request):
-    context = {
-        'title': 'Профиль пользователя',
-
-    }
-    return render(request, 'users/profile.html', context)
-
-
-def registration(request):
-    context = {
-        'title': 'Регистрация',
-
-    }
-    return render(request, 'users/registration.html', context)
-
-# def user_logout(request):
-#     auth.logout(request)
+# def registration(request):
+#     context = {
+#         'title': 'Регистрация',
+#
+#     }
+#     return render(request, 'users/registration.html', context)

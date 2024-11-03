@@ -12,48 +12,64 @@
             <div class="row justify-content-center">
                 <div class="col-md-9 bg-white p-4 mb-5 mx-2 rounded custom-shadow">
                     <h2 class="text-center mb-4">Регистрация</h2>
-                    <form>
+                    <form action="" method="POST">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">Имя</label>
-                                <input type="text" class="form-control" id="firstName"
+                                <label for="id_first_name" class="form-label">Имя</label>
+                                <input type="text" class="form-control" name="first_name" id="id_first_name"
+                                       value="{%if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
                                        placeholder="Введите ваше имя">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Фамилия</label>
-                                <input type="text" class="form-control" id="lastName"
+                                <label for="id_last_name" class="form-label">Фамилия</label>
+                                <input type="text" class="form-control" name="last_name" id="id_last_name"
+                                       value="{%if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
                                        placeholder="Введите вашу фамилию">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="username" class="form-label">Имя пользователя*</label>
-                                <input type="text" class="form-control" id="username"
+                                <label for="id_username" class="form-label">Имя пользователя*</label>
+                                <input type="text" class="form-control" name="username" id="id_username"
+                                       value="{%if form.username.value %}{{ form.username.value }}{% endif %}"
                                        placeholder="Введите ваше имя пользователя" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email*</label>
-                                <input type="email" class="form-control" id="email"
+                                <label for="id_email" class="form-label">Email*</label>
+                                <input type="email" class="form-control" name="email" id="id_email"
+                                       value="{%if form.email.value %}{{ form.email.value }}{% endif %}"
                                        placeholder="Введите ваш email" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="password1" class="form-label">Пароль*</label>
-                                <input type="password" class="form-control" id="password1"
+                                <label for="id_password1" class="form-label">Пароль*</label>
+                                <input type="password" class="form-control" name="password1" id="id_password1"
                                        placeholder="Введите пароль" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="password2" class="form-label">Подтверждение пароля*</label>
-                                <input type="password" class="form-control" id="password2"
+                                <label for="id_password2" class="form-label">Подтверждение пароля*</label>
+                                <input type="password" class="form-control" name="password2" id="id_password2"
                                        placeholder="Подтвердите пароль" required>
                             </div>
                         </div>
                         <button type="submit"
                                 class="btn btn-dark btn-block">Зарегистрироваться
                         </button>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            {% if form.errors %}
+                                {% for error in form.errors.as_data.values %}
+                                    {% for data in error.0 %}
+                                        <p>{{ data }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
 {% block footer %}
     <div class="mt-auto">
         <footer class="mt-auto py-1 bg-dark">
