@@ -1,37 +1,55 @@
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LoginView
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import request
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserLoginForm, RegisterUserForm
+from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm
 
 
 # Create your views here.
 
 
-class LoginUser(LoginView):
+class LoginUser(SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
     extra_context = {'title': 'Авторизация'}
+
+    success_message = f' Добро пожаловать!'
 
     def get_success_url(self):
         return reverse_lazy('catalog:catalog', kwargs={'cat_slug': 'all'})
 
 
-def profile(request):
-    context = {
-        'title': 'Профиль пользователя',
-
-    }
-    return render(request, 'users/profile.html', context)
 
 
-class RegisterUser(CreateView):
+class RegisterUser(CreateView, SuccessMessageMixin):
     template_name = 'users/registration.html'
     form_class = RegisterUserForm
     extra_context = {'title': 'Регистрация'}
     success_url = reverse_lazy('users:login')
+    success_message = 'Аккаунт зарегистрирован'
+
+
+@method_decorator(login_required, name="dispatch")
+class UserEditView(UpdateView, SuccessMessageMixin):
+    template_name = 'users/profile.html'
+    form_class = UserUpdateForm
+    extra_context = {'title': 'Мой профиль'}
+    success_message = 'Данные пользователя успешно изменены'
+
+
+    def get_object(self):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('users:profile')
+
+@method_decorator(login_required, name="dispatch")
+class UserLogoutView(LogoutView, SuccessMessageMixin):
+    success_message = 'Вы вышли из аккаунта'
 
 # def user_logout(request):
 #     auth.logout(request)
@@ -60,3 +78,12 @@ class RegisterUser(CreateView):
 #
 #     }
 #     return render(request, 'users/registration.html', context)
+
+# def profile(request):
+#     context = {
+#         'title': 'Профиль пользователя',
+#
+#     }
+#     return render(request, 'users/profile.html', context)
+
+

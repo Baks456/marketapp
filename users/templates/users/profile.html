@@ -14,39 +14,56 @@
                                 <div class="col-md-5">
                                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                                         <h3 class="text-center mb-4">Профиль пользователя</h3>
-                                        <form>
+                                        <form action="" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-md-12 mb-3 text-center">
+                                                {% if user.photo %}
+                                                    <img src="{{ user.photo.url }}"
+                                                        alt="Аватар пользователя" class="img-fluid rounded-circle"
+                                                        style="max-width: 150px;">
+                                                    {% else %}
                                                     <img src="{% static 'deps/images/avatar.png' %}"
                                                         alt="Аватар пользователя" class="img-fluid rounded-circle"
                                                         style="max-width: 150px;">
-                                                    <input type="file" class="form-control mt-3" id="avatar"
+                                                    {% endif %}
+                                                    <input type="file" class="form-control mt-3" id="id_photo" name="photo"
                                                         accept="image/*">
+
                                                 </div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="firstName" class="form-label">Имя*</label>
-                                                    <input type="text" class="form-control" id="firstName"
-                                                        placeholder="Введите ваше имя" value="" required>
+                                                    <label for="id_firstName" class="form-label">Имя*</label>
+                                                    <input type="text" class="form-control" id="id_firstName" name="first_name"
+                                                         value="{{ user.first_name }}" required>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="lastName" class="form-label">Фамилия*</label>
-                                                    <input type="text" class="form-control" id="lastName"
-                                                        placeholder="Введите вашу фамилию" value="" required>
+                                                    <label for="id_lastName" class="form-label">Фамилия*</label>
+                                                    <input type="text" class="form-control" id="id_lastName" name="last_name"
+                                                         value="{{ user.last_name }}" required>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="username" class="form-label">Имя пользователя*</label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Введите ваше имя пользователя" value="" required>
+                                                    <label for="id_username" class="form-label">Имя пользователя*</label>
+                                                    <input type="text" class="form-control" id="id_username" name="username"
+                                                         value="{{ user.username }}" required>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="email" class="form-label">Email*</label>
-                                                    <input type="email" class="form-control" id="email"
-                                                        placeholder="Введите ваш email *youremail@example.com" value=""
+                                                    <label for="id_email" class="form-label">Email*</label>
+                                                    <input type="email" class="form-control" id="id_email" name="email"
+                                                           value="{{ user.email }}"
                                                         required>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-dark">Сохранить</button>
                                         </form>
+                            {% if form.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                {% for error in form.errors.as_data.values %}
+                                    {% for data in error.0 %}
+                                        <p>{{ data }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                        </div>
+                            {% endif %}
                                     </div>
                                 </div>
                                 <!-- Корзина -->
