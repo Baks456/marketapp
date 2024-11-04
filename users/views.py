@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import request
+from django.http import request, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
@@ -20,6 +21,8 @@ class LoginUser(SuccessMessageMixin, LoginView):
     success_message = f' Добро пожаловать!'
 
     def get_success_url(self):
+        # if self.request.POST.get('next'):
+        #     return HttpResponseRedirect(self.request.POST.get('next'))
         return reverse_lazy('catalog:catalog', kwargs={'cat_slug': 'all'})
 
 
@@ -50,6 +53,10 @@ class UserEditView(UpdateView, SuccessMessageMixin):
 @method_decorator(login_required, name="dispatch")
 class UserLogoutView(LogoutView, SuccessMessageMixin):
     success_message = 'Вы вышли из аккаунта'
+
+
+def users_cart(request):
+    return render(request, 'users/user_cart.html')
 
 # def user_logout(request):
 #     auth.logout(request)

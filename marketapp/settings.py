@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'baseitems.apps.BaseitemsConfig',
     'goods.apps.GoodsConfig',
     'users.apps.UsersConfig',
+    'carts.apps.CartsConfig',
 
 ]
 
