@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {%  load static %}
 
-<!-- Стиль footer-a для главной страницы -->
 
-<!-- Favicons for different platforms -->
+
+{% block cart_modal_window %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
 
 {% block content %} <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1> {% endblock %}
 {% block footer %}

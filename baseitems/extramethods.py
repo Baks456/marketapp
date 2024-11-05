@@ -16,3 +16,4 @@ def slug_from_rus_to_eng(st: str) -> str:
     return res
 
 
+

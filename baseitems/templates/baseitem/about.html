@@ -5,6 +5,11 @@
 {% block extra_css %}<link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}"> {% endblock %}
 <!-- Favicons for different platforms -->
 
+{% block cart_modal_window %}
+    {% include "includes/cart_button.html" %}
+{% endblock %}
+
+
 {% block content %}
     <div class="mt-5 pt-5 p-3 bg-secondary bg-opacity-50 shadow-lg rounded">
 
