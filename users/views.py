@@ -1,12 +1,14 @@
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import request, HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
+from carts.models import ProductCart
 from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm
 
 
@@ -17,13 +19,26 @@ class LoginUser(SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
     extra_context = {'title': 'Авторизация'}
-
     success_message = f' Добро пожаловать!'
 
+
     def get_success_url(self):
-        # if self.request.POST.get('next'):
-        #     return HttpResponseRedirect(self.request.POST.get('next'))
+        redirect_to = self.request.POST.get('next', None)
+        if redirect_to and redirect_to != reverse('users:login'):
+            return redirect_to
         return reverse_lazy('catalog:catalog', kwargs={'cat_slug': 'all'})
+
+    def form_valid(self, form):
+        session_key = self.request.session.session_key
+        user = form.get_user()
+        if user:
+            auth.login(self.request, user)
+            # old_carts = ProductCart.objects.filter(user=user)
+            # if old_carts.exists():
+            #     old_carts.delete()
+            ProductCart.objects.filter(session_key=session_key).update(user=user)
+            session_key = None
+            return HttpResponseRedirect(self.get_success_url())
 
 
 
