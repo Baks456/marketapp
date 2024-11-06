@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/', include('users.urls', namespace='user')),
     path('captcha/', include('captcha.urls')),
     path('cart/', include('carts.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
 ]
 
 if DEBUG :

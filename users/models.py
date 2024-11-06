@@ -8,6 +8,7 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to='users/images/%Y/%m/%d/', blank=True, null=True, verbose_name='Фото пользователя')
     date_of_birth = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
     email = models.EmailField(unique=True, verbose_name='Email')
+    phone_number = models.CharField(max_length=20, null=True, blank=True, verbose_name='Номер телефона')
 
     class Meta:
         verbose_name = "Пользователь"

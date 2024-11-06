@@ -82,7 +82,7 @@
                                             <!-- Закончилась разметка корзины -->
                                         </div>
 
-                                        <a class="btn btn-dark {% if not carts %}disabled{% endif %}" href="../orders/create_order.html">
+                                        <a class="btn btn-dark {% if not carts %}disabled{% endif %}" href="{% url 'orders:create_order' %}">
                                             Оформить заказ
                                         </a>
 
