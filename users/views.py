@@ -2,6 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Prefetch
 from django.http import request, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -9,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
 from carts.models import ProductCart
+from orders.models import UserOrder, OrderItem
 from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm
 
 
@@ -64,6 +66,12 @@ class UserEditView(UpdateView, SuccessMessageMixin):
 
     def get_success_url(self):
         return reverse_lazy('users:profile')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Мой профиль'
+        context['orders'] = UserOrder.objects.filter(user=self.request.user).prefetch_related(Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
+        return context
 
 @method_decorator(login_required, name="dispatch")
 class UserLogoutView(LogoutView, SuccessMessageMixin):
