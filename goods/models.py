@@ -1,9 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy
-
-from baseitems.extramethods import slug_from_rus_to_eng
 
 
 # Create your models here.
@@ -33,7 +30,8 @@ class Products(models.Model):
     image = models.ImageField(upload_to='goods_images/%Y/%m/%d/', default=None, blank=True, null=True,
                               verbose_name='Изображение товара')
     price = models.DecimalField(default=1000000, max_digits=12, decimal_places=2, verbose_name='Цена')
-    discount = models.DecimalField(default=0.0, max_digits=5, decimal_places=2, verbose_name='Скидка в %', validators=[MinValueValidator(0), MaxValueValidator(100)])
+    discount = models.DecimalField(default=0.0, max_digits=5, decimal_places=2, verbose_name='Скидка в %',
+                                   validators=[MinValueValidator(0), MaxValueValidator(100)])
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='Категория')
 
@@ -43,17 +41,15 @@ class Products(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        ordering = ['-price', 'name',]
+        ordering = ['-price', 'name', ]
 
     def display_id(self):
         return f'{self.id:06}'
 
     def real_price(self):
         if self.discount:
-            return round((self.price - self.price*self.discount/100), 2)
+            return round((self.price - self.price * self.discount / 100), 2)
         return self.price
 
     def get_absolute_url(self):
         return reverse_lazy('goods:product', kwargs={'product_slug': self.slug})
-
-
