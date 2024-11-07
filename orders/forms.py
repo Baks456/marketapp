@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 
 
@@ -8,6 +10,16 @@ class CreateOrderForm(forms.Form):
     required_delivery = forms.ChoiceField( choices=[('0', False), ('1', True)], initial='0')
     delivery_address = forms.CharField(required=False)
     payment_on_delivery = forms.ChoiceField( choices=[('0', False), ('1', True)], initial='0')
+
+    def clean_phone_number(self):
+        data = self.cleaned_data['phone_number']
+        if not data.isdigit():
+            raise forms.ValidationError('В номере должны быть только цифры')
+        patter = re.compile(r'^[0-9]{10}$')
+        if not patter.match(data):
+            raise forms.ValidationError('В номере должны быть 10 цифр')
+        return data
+
 
     # first_name = forms.CharField(label='Имя', max_length=100, widget=forms.TextInput(
     #     attrs={'class': 'form-control', 'placeholder': 'Введите ваше имя'}))
