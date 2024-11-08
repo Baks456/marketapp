@@ -1,11 +1,10 @@
 from django.urls import path
 
-from baseitems import views
-
+from baseitems.views import IndexPageView, AboutPageView
 
 app_name = 'baseitems'
 urlpatterns = [
-    path('', views.index, name='home'),
-    path('about/', views.about, name='about'),
+    path('', IndexPageView.as_view(), name='home'),
+    path('about/', AboutPageView.as_view(), name='about'),
 
 ]
