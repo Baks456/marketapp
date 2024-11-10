@@ -26,6 +26,7 @@
                        {% if request.GET.on_sale == 'on' %}checked{% endif %}>
                 {% if request.GET.q %}
                     <input type="hidden" name="q" value="{{ request.GET.q }}">
+                    {% csrf_token %}
                 {% endif %}
                 <label class="form-check-label" for="flexCheckDefault">
                     Товары по акции
@@ -86,7 +87,7 @@
                             {% endif %}
 
 
-                            <a href="{% url 'carts:cart_add' %}" class="btn add-to-cart">
+                            <a href="{% url 'carts:cart_add' %}" class="btn add-to-cart" data-product-id="{{ good.id }}">
                                 {% csrf_token %}
                                 <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg' %}" alt="Catalog Icon"
                                      width="32" height="32">

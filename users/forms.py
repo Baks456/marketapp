@@ -35,7 +35,7 @@ class RegisterUserForm(UserCreationForm):
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', 'last_name', 'first_name', 'photo')
+        fields = ('username', 'email', 'last_name', 'first_name', 'photo', 'phone_number')
 
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')

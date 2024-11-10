@@ -7,6 +7,21 @@ from goods.models import Products
 from goods.utils import q_search
 
 
+class ProductPageView(DetailView):
+    model = Products
+    template_name = 'goods/product.html'
+    slug_url_kwarg = 'product_slug'
+    context_object_name = 'good'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'{self.object.category.name} - {self.object.name}'
+        return context
+
+    def qet_object(self, queryset=None):
+        return get_object_or_404(Products, slug=self.kwargs[self.slug_url_kwarg])
+
+
 class CatalogPageView(ListView):
     model = Products
     template_name = 'goods/catalog.html'
@@ -14,12 +29,9 @@ class CatalogPageView(ListView):
     paginate_by = 6
     allow_empty = False
 
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Каталог товаров'
-        # context['goods'] = ''
+        context['title'] = f'Каталог товаров'
         return context
 
     def get_queryset(self):
@@ -39,12 +51,6 @@ class CatalogPageView(ListView):
         return goods
 
 
-
-
-
-        # if self.kwargs['cat_slug'] == 'all' or self.kwargs['cat_slug'] == None:
-        #     return Products.objects.all()
-        # return Products.objects.filter(category__slug=self.kwargs['cat_slug'])
 
 
 # def catalog(request, cat_slug=None):
@@ -96,21 +102,6 @@ def search(request, cat_slug=None):
         'cat_slug': cat_slug,
     }
     return render(request, 'goods/search.html', context)
-
-
-class ProductPageView(DetailView):
-    model = Products
-    template_name = 'goods/product.html'
-    slug_url_kwarg = 'product_slug'
-    context_object_name = 'good'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = f'{self.object.category.name} - {self.object.name}'
-        return context
-
-    def qet_object(self, queryset=None):
-        return get_object_or_404(Products, slug=self.kwargs[self.slug_url_kwarg])
 
 # def product(request, product_slug):
 #     good = Products.objects.get(slug=product_slug)
