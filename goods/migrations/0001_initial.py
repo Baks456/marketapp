@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -32,11 +31,14 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=150, unique=True, verbose_name='Название продукта')),
                 ('slug', models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='URL')),
                 ('description', models.TextField(blank=True, null=True, verbose_name='Описание')),
-                ('image', models.ImageField(blank=True, default=None, null=True, upload_to='goods_images/%Y/%m/%d/', verbose_name='Изображение товара')),
+                ('image', models.ImageField(blank=True, default=None, null=True, upload_to='goods_images/%Y/%m/%d/',
+                                            verbose_name='Изображение товара')),
                 ('price', models.DecimalField(decimal_places=2, default=1000000, max_digits=12, verbose_name='Цена')),
-                ('discount', models.DecimalField(decimal_places=2, default=0.0, max_digits=5, verbose_name='Скидка в %')),
+                ('discount',
+                 models.DecimalField(decimal_places=2, default=0.0, max_digits=5, verbose_name='Скидка в %')),
                 ('quantity', models.PositiveIntegerField(default=0, verbose_name='Количество')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='goods.categories', verbose_name='Категория')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='goods.categories',
+                                               verbose_name='Категория')),
             ],
             options={
                 'verbose_name': 'Продукт',

@@ -64,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "django.middleware.cache.UpdateCacheMiddleware",  #кэширование всего сайта
+    # "django.middleware.cache.FetchFromCacheMiddleware", # кэширование всего сайта
 
 ]
 
@@ -104,6 +106,20 @@ DATABASES = {
     }
 }
 
+# REDIS редиска для кеширования
+CACHES = {
+    "default": {
+        # "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+# для кэширования всего сайта
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+# CACHE_MIDDLEWARE_SECONDS = 10
+# CACHE_MIDDLEWARE_KEY_PREFIX = "marketapp"
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -143,12 +159,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static', ]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
 
 LOGOUT_REDIRECT_URL = 'baseitems:home'
 LOGIN_URL = 'users:login'
@@ -161,7 +175,6 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = 'users.User'
 DEFAULT_USER_IMAGE = MEDIA_URL + 'users/default.png'
-
 
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'baseitems:home'
@@ -198,8 +211,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
     'users.pipeline.new_users_handler',
 )
-
-
 
 SITE_ID = 1
 

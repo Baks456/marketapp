@@ -1,5 +1,6 @@
 {% load static %}
 {% load goods_tags %}
+{% load cache %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +68,8 @@
                             <li><a class="dropdown-item  text-white" href="{% url "user:profile" %}">Личный кабинет</a>
                             </li>
                             {% if user.is_staff %}
-                            <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a>
-                            </li>
+                                <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a>
+                                </li>
                             {% endif %}
                             <li>
                                 <hr class="dropdown-divider">
@@ -97,25 +98,28 @@
         <!-- Каталог и корзина с фиксированным расположением на странице -->
         <div class="row mt-1 position-fixed z-3">
             <!-- Каталог -->
-            <div class="dropdown mb-2">
-                <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Каталог
-                    <img class="mx-1" src="{% static 'deps/icons/grid-fill.svg' %}" alt="Catalog Icon" width="16"
-                         height="16">
-                </button>
-                <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+            {% cache 60 catalog_bar %}
+                <div class="dropdown mb-2">
+                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Каталог
+                        <img class="mx-1" src="{% static 'deps/icons/grid-fill.svg' %}" alt="Catalog Icon" width="16"
+                             height="16">
+                    </button>
+                    <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
 
-                    {% show_category as categories %}
-                    {% if categories %}
-                        {% for cat in categories %}
-                            <li><a class="dropdown-item text-white" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-                            </li>
-                        {% endfor %}
-                    {% endif %}
+                        {% show_category as categories %}
+                        {% if categories %}
+                            {% for cat in categories %}
+                                <li><a class="dropdown-item text-white"
+                                       href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            {% endcache %}
             <!-- Значек корзины, вызывает модальное окно -->
 
             {% block cart_modal_window %} {% endblock %}

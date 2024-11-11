@@ -150,12 +150,12 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                 // Сообщение
+                // Сообщение
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                 // Через 7сек убираем сообщение
+                // Через 7сек убираем сообщение
                 setTimeout(function () {
-                     successMessage.fadeOut(400);
+                    successMessage.fadeOut(400);
                 }, 4000);
 
                 // Изменяем количество товаров в корзине
@@ -208,7 +208,7 @@ $(document).ready(function () {
         }
     });
 
-     // Форматирования ввода номера телефона в форме (xxx) xxx-хххx
+    // Форматирования ввода номера телефона в форме (xxx) xxx-хххx
     document.getElementById('id_phone_number').addEventListener('input', function (e) {
         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
         e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');

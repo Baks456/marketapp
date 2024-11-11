@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('goods', '0001_initial'),
     ]
@@ -14,6 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='products',
             name='discount',
-            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=4, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='Скидка в %'),
+            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=4,
+                                      validators=[django.core.validators.MinValueValidator(0),
+                                                  django.core.validators.MaxValueValidator(100)],
+                                      verbose_name='Скидка в %'),
         ),
     ]

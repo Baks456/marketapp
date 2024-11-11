@@ -76,7 +76,8 @@
                             {% else %}
                                 <p><strong>{{ good.real_price }} $</strong></p>
                             {% endif %}
-                            <a href="{% url 'carts:cart_add' %}" class="btn add-to-cart" data-product-id="{{ good.id }}">
+                            <a href="{% url 'carts:cart_add' %}" class="btn add-to-cart"
+                               data-product-id="{{ good.id }}">
                                 {% csrf_token %}
                                 <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg' %}" alt="Catalog Icon"
                                      width="32" height="32">
@@ -95,7 +96,7 @@
 {% block footer %}
     <!-- Пагинация -->
     {% if page_obj.has_other_pages %}
-    <div class="mt-auto">
+        <div class="mt-auto">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <div class="custom-shadow d-flex rounded">
@@ -112,7 +113,7 @@
                     {% for page in page_obj.paginator.page_range %}
                         {% if page >= page_obj.number|add:-2  and page <= page_obj.number|add:2 %}
                             <li class="page-item {% if page_obj.number == page %}active{% endif %}"><a class="page-link"
-                                                                                                    href="?{% change_param page=page %}">{{ page }}</a>
+                                                                                                       href="?{% change_param page=page %}">{{ page }}</a>
                             </li>
                         {% endif %}
 
@@ -132,14 +133,14 @@
                 </div>
             </ul>
         </nav>
-        {% endif %}
-        <!-- Пагинация -->
+    {% endif %}
+<!-- Пагинация -->
 
-        <footer class="mt-auto py-1 bg-dark">
-            <div class="container">
-                <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
-            </div>
-        </footer>
+<footer class="mt-auto py-1 bg-dark">
+    <div class="container">
+        <p class="m-2 text-center text-white">Copyright &copy; Baks Hi-Tech store 2024</p>
     </div>
+</footer>
+</div>
 
 {% endblock %}

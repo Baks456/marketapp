@@ -7,7 +7,7 @@ from carts.utils import get_user_carts
 
 class CartsMixin():
 
-    def get_cart(self, request, product=None, cart_id = None):
+    def get_cart(self, request, product=None, cart_id=None):
 
         if request.user.is_authenticated:
             query_kwargs = {'user': request.user}

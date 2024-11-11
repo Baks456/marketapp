@@ -1,14 +1,14 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, TemplateView
 
+from baseitems.cachemixins import CacheMixin
 from carts.models import ProductCart
 from orders.models import UserOrder, OrderItem
 from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm
@@ -51,7 +51,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class UserEditView(SuccessMessageMixin, UpdateView ):
+class UserEditView(SuccessMessageMixin, CacheMixin, UpdateView):
     template_name = 'users/profile.html'
     form_class = UserUpdateForm
     success_message = 'Данные пользователя успешно изменены'
@@ -63,8 +63,11 @@ class UserEditView(SuccessMessageMixin, UpdateView ):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Мой профиль'
-        context['orders'] = UserOrder.objects.filter(user=self.request.user).prefetch_related(
+
+        cache_info = UserOrder.objects.filter(user=self.request.user).prefetch_related(
             Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
+
+        context['orders'] = self.set_or_get_cache(cache_info, f'orders_cache_{self.request.user.id}', 60)
         return context
 
 
@@ -74,8 +77,6 @@ class UserCartView(TemplateView):
 # @method_decorator(login_required, name="dispatch")
 # class UserLogoutView(SuccessMessageMixin, LogoutView):
 #     success_message = 'Вы вышли из аккаунта'
-
-
 
 
 # def users_cart(request):

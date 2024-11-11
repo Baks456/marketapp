@@ -45,15 +45,15 @@
 
                         <button type="submit" class="btn btn-dark btn-block">Войти</button>
                         {{ captcha }}
-{#                        <div>#}
-{#                        {% if form.errors %}#}
-{#                            {% for error in form.errors.as_data.values %}#}
-{#                                {% for data in error.0 %}#}
-{#                                    <p>{{ data }}</p>#}
-{#                                {% endfor %}#}
-{#                            {% endfor %}#}
-{#                        {% endif %}#}
-{#                        </div>#}
+                        {#                        <div>#}
+                        {#                        {% if form.errors %}#}
+                        {#                            {% for error in form.errors.as_data.values %}#}
+                        {#                                {% for data in error.0 %}#}
+                        {#                                    <p>{{ data }}</p>#}
+                        {#                                {% endfor %}#}
+                        {#                            {% endfor %}#}
+                        {#                        {% endif %}#}
+                        {#                        </div>#}
                     </form>
                     <div class="mt-3">
                         <a href="#">Забыли пароль?</a> | <a href="{% url 'user:registration' %}">Создать аккаунт</a>

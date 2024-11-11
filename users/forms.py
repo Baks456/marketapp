@@ -1,9 +1,5 @@
-from captcha.fields import CaptchaField
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from django import forms
-
-from users.models import User
 
 
 class UserLoginForm(AuthenticationForm):
@@ -48,4 +44,3 @@ class UserUpdateForm(UserChangeForm):
     #     if get_user_model().objects.filter(username=username).exists():
     #         raise forms.ValidationError('Данное имя пользователя занято')
     #     return username
-

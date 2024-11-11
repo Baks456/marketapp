@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 
+
 # Create your views here.
 
 
@@ -22,8 +23,6 @@ class AboutPageView(TemplateView):
         context['content'] = 'Данный сайт создан потому, что был создан.'
         context['text_on_page'] = 'Куча странного текста, которая будет дополнена'
         return context
-
-
 
 # def index(request):
 #

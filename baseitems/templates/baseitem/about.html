@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{%  load static %}
+{% load static %}
 
 <!-- Стиль footer-a для главной страницы -->
-{% block extra_css %}<link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}"> {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}"> {% endblock %}
 <!-- Favicons for different platforms -->
 
 {% block cart_modal_window %}
@@ -13,8 +14,8 @@
 {% block content %}
     <div class="mt-5 pt-5 p-3 bg-secondary bg-opacity-50 shadow-lg rounded">
 
-    <h2 class="m-2"><strong>{{ content }}</strong></h2>
-    <p class="m-2">{{ text_on_page }}</p>
+        <h2 class="m-2"><strong>{{ content }}</strong></h2>
+        <p class="m-2">{{ text_on_page }}</p>
     </div>
 {% endblock %}
 {% block footer %}
