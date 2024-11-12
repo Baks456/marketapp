@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from marketapp.config import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-***REMOVED***'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,14 +99,7 @@ WSGI_APPLICATION = 'marketapp.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'marketapp',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': CONFIG_POSTGRES_DB
 }
 
 # REDIS редиска для кеширования
@@ -187,8 +183,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.yandex.ru'
 # EMAIL_PORT = 465
-# EMAIL_HOST_USER = '***REMOVED***'
-# EMAIL_HOST_PASSWORD = '***REMOVED***'
+# EMAIL_HOST_USER = CONFIG_EMAIL_HOST_USER
+# EMAIL_HOST_PASSWORD = CONFIG_EMAIL_HOST_PASSWORD
 # EMAIL_USE_SSL = True
 #
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -198,8 +194,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Гитхаб авторизация
 
-SOCIAL_AUTH_GITHUB_KEY = '***REMOVED***'
-SOCIAL_AUTH_GITHUB_SECRET = '***REMOVED***'
+SOCIAL_AUTH_GITHUB_KEY = CONFIG_SOCIAL_AUTH_GITHUB_KEY
+SOCIAL_AUTH_GITHUB_SECRET = CONFIG_SOCIAL_AUTH_GITHUB_SECRET
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',

@@ -9,8 +9,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, TemplateView
 
 from baseitems.cachemixins import CacheMixin
-from carts.models import ProductCart
-from orders.models import UserOrder, OrderItem
+# from carts.models import ProductCart
+# from orders.models import UserOrder, OrderItem
 from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm, UserPasswordChangeForm
 
 
@@ -37,7 +37,7 @@ class LoginUser(SuccessMessageMixin, LoginView):
             # old_carts = ProductCart.objects.filter(user=user)
             # if old_carts.exists():
             #     old_carts.delete()
-            ProductCart.objects.filter(session_key=session_key).update(user=user)
+            # ProductCart.objects.filter(session_key=session_key).update(user=user)
             session_key = None
             return HttpResponseRedirect(self.get_success_url())
 
@@ -64,8 +64,8 @@ class UserEditView(SuccessMessageMixin, CacheMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Мой профиль'
 
-        cache_info = UserOrder.objects.filter(user=self.request.user).prefetch_related(
-            Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
+        # cache_info = UserOrder.objects.filter(user=self.request.user).prefetch_related(
+        #     Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
 
         context['orders'] = self.set_or_get_cache(cache_info, f'orders_cache_{self.request.user.id}', 60)
         return context

@@ -28,8 +28,8 @@ urlpatterns = [
     path('catalog/', include('goods.urls', namespace='catalog')),
     path('user/', include('users.urls', namespace='user')),
     path('captcha/', include('captcha.urls')),
-    path('cart/', include('carts.urls', namespace='cart')),
-    path('orders/', include('orders.urls', namespace='orders')),
+    # path('cart/', include('carts.urls', namespace='cart')),
+    # path('orders/', include('orders.urls', namespace='orders')),
     path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 

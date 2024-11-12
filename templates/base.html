@@ -45,9 +45,9 @@
                             <li><a class="dropdown-item  text-white" href="{% url 'baseitems:about' %}">Про нас</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  text-white" href="{% url 'user:user_cart' %}">Корзина</a>
-                    </li>
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link  text-white" href="{% url 'user:user_cart' %}">Корзина</a>#}
+{#                    </li>#}
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link  text-white" href="{% url 'user:profile' %}">{{ user.username }}</a>
