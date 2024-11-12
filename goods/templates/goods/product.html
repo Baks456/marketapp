@@ -56,11 +56,11 @@
                             <p class="card-text">Цена: <strong>{{ good.real_price }} $</strong></p>
                             <h5 class="card-title">{{ good.name }}</h5>
                             <p class="card-text">{{ good.description }}</p>
-                            <a href="#" class="btn btn-dark add-to-cart"
+                            <a href="{ % url 'carts:cart_add' % }" class="btn btn-dark add-to-cart"
                                data-product-id="{{ good.id }}">
                                 {% csrf_token %}
                                 Добавить в корзину</a>
-                            % url 'carts:cart_add' %
+
                         </div>
                     </div>
                 </div>
