@@ -1,10 +1,9 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views import View
 
+from carts.mixins import CartsMixin
 from carts.models import UserCart
 from goods.models import Products
-from carts.mixins import CartsMixin
 
 
 # Create your views here.
@@ -22,8 +21,8 @@ class CartAddView(CartsMixin, View):
             cart.save()
         else:
             UserCart.objects.create(user=request.user if request.user.is_authenticated else None,
-                                session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                product=product, quantity=1)
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=1)
 
         response_data = {
             "message": "Товар добавлен в корзину",

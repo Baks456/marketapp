@@ -9,8 +9,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, TemplateView
 
 from baseitems.cachemixins import CacheMixin
-# from carts.models import ProductCart
-# from orders.models import UserOrder, OrderItem
+from carts.models import UserCart
+from orders.models import Order, OrderItem
 from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm, UserPasswordChangeForm
 
 
@@ -34,10 +34,10 @@ class LoginUser(SuccessMessageMixin, LoginView):
         user = form.get_user()
         if user:
             auth.login(self.request, user)
-            # old_carts = ProductCart.objects.filter(user=user)
+            old_carts = UserCart.objects.filter(user=user)
             # if old_carts.exists():
             #     old_carts.delete()
-            # ProductCart.objects.filter(session_key=session_key).update(user=user)
+            UserCart.objects.filter(session_key=session_key).update(user=user)
             session_key = None
             return HttpResponseRedirect(self.get_success_url())
 
@@ -64,24 +64,23 @@ class UserEditView(SuccessMessageMixin, CacheMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Мой профиль'
 
-        # cache_info = UserOrder.objects.filter(user=self.request.user).prefetch_related(
-        #     Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
+        cache_info = Order.objects.filter(user=self.request.user).prefetch_related(
+            Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id')
 
-        # context['orders'] = self.set_or_get_cache(cache_info, f'orders_cache_{self.request.user.id}', 60)
+        context['orders'] = self.set_or_get_cache(cache_info, f'orders_cache_{self.request.user.id}', 60)
         return context
 
 
 class UserCartView(TemplateView):
     template_name = 'users/user_cart.html'
 
-class UserPasswordChange(SuccessMessageMixin, PasswordChangeView ):
+
+class UserPasswordChange(SuccessMessageMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'users/password_change_form.html'
     success_message = 'Пароль успешно изменен, войдите под новым паролем'
     success_url = reverse_lazy('users:login')
     extra_context = {'title': 'Изменение пароля пользователя'}
-
-
 
 # @method_decorator(login_required, name="dispatch")
 # class UserLogoutView(SuccessMessageMixin, LogoutView):

@@ -1,4 +1,4 @@
-from  django.contrib.auth.models import  Group
+from django.contrib.auth.models import Group
 
 
 def new_users_handler(backend, user, response, *args, **kwargs):

@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('goods', '0002_alter_products_discount'),
     ]
@@ -13,7 +12,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='categories',
-            options={'ordering': ['-sort_level', 'name'], 'verbose_name': 'Категория', 'verbose_name_plural': 'Категории'},
+            options={'ordering': ['-sort_level', 'name'], 'verbose_name': 'Категория',
+                     'verbose_name_plural': 'Категории'},
         ),
         migrations.AlterModelOptions(
             name='products',
@@ -22,6 +22,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='products',
             name='discount',
-            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=5, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='Скидка в %'),
+            field=models.DecimalField(decimal_places=2, default=0.0, max_digits=5,
+                                      validators=[django.core.validators.MinValueValidator(0),
+                                                  django.core.validators.MaxValueValidator(100)],
+                                      verbose_name='Скидка в %'),
         ),
     ]

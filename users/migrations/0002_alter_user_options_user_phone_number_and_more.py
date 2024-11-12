@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0001_initial'),
     ]
@@ -27,6 +26,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='photo',
-            field=models.ImageField(blank=True, null=True, upload_to='users/images/%Y/%m/%d/', verbose_name='Фото пользователя'),
+            field=models.ImageField(blank=True, null=True, upload_to='users/images/%Y/%m/%d/',
+                                    verbose_name='Фото пользователя'),
         ),
     ]

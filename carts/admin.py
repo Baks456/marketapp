@@ -2,8 +2,8 @@ from django.contrib import admin
 
 from carts.models import UserCart
 
-# Register your models here.
 
+# Register your models here.
 
 
 class CartTabAdmin(admin.TabularInline):
@@ -16,8 +16,8 @@ class CartTabAdmin(admin.TabularInline):
 
 @admin.register(UserCart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ["user_display", "product_display", "quantity", "created_timestamp",]
-    list_filter = ["created_timestamp", "user", "product__name",]
+    list_display = ["user_display", "product_display", "quantity", "created_timestamp", ]
+    list_filter = ["created_timestamp", "user", "product__name", ]
 
     def user_display(self, obj):
         if obj.user:

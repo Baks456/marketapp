@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 
 
-
 class UserLoginForm(AuthenticationForm):
     # username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':"Введите ваше имя пользователя или Email"}), label='Имя пользователя', required=True)
     # password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Пароль', required=True)
@@ -50,8 +49,8 @@ class UserUpdateForm(UserChangeForm):
     #         raise forms.ValidationError('Данное имя пользователя занято')
     #     return username
 
-class UserPasswordChangeForm(PasswordChangeForm):
 
+class UserPasswordChangeForm(PasswordChangeForm):
     class Meta:
         model = get_user_model()
         fields = ('old_password', 'new_password1', 'new_password2')
