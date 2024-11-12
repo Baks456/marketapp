@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
@@ -11,7 +11,7 @@ from django.views.generic import CreateView, UpdateView, TemplateView
 from baseitems.cachemixins import CacheMixin
 from carts.models import ProductCart
 from orders.models import UserOrder, OrderItem
-from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm
+from users.forms import UserLoginForm, RegisterUserForm, UserUpdateForm, UserPasswordChangeForm
 
 
 # Create your views here.
@@ -73,6 +73,15 @@ class UserEditView(SuccessMessageMixin, CacheMixin, UpdateView):
 
 class UserCartView(TemplateView):
     template_name = 'users/user_cart.html'
+
+class UserPasswordChange(SuccessMessageMixin, PasswordChangeView ):
+    form_class = UserPasswordChangeForm
+    template_name = 'users/password_change_form.html'
+    success_message = 'Пароль успешно изменен, войдите под новым паролем'
+    success_url = reverse_lazy('users:login')
+    extra_context = {'title': 'Изменение пароля пользователя'}
+
+
 
 # @method_decorator(login_required, name="dispatch")
 # class UserLogoutView(SuccessMessageMixin, LogoutView):

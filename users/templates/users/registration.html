@@ -21,18 +21,6 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="id_first_name" class="form-label">Имя</label>
-                                <input type="text" class="form-control" name="first_name" id="id_first_name"
-                                       value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
-                                       placeholder="Введите ваше имя">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="id_last_name" class="form-label">Фамилия</label>
-                                <input type="text" class="form-control" name="last_name" id="id_last_name"
-                                       value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
-                                       placeholder="Введите вашу фамилию">
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 <label for="id_username" class="form-label">Имя пользователя*</label>
                                 <input type="text" class="form-control" name="username" id="id_username"
                                        value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
@@ -44,6 +32,19 @@
                                        value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
                                        placeholder="Введите ваш email" required>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_first_name" class="form-label">Имя</label>
+                                <input type="text" class="form-control" name="first_name" id="id_first_name"
+                                       value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                                       placeholder="Введите ваше имя">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_last_name" class="form-label">Фамилия</label>
+                                <input type="text" class="form-control" name="last_name" id="id_last_name"
+                                       value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                                       placeholder="Введите вашу фамилию">
+                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="id_password1" class="form-label">Пароль*</label>
                                 <input type="password" class="form-control" name="password1" id="id_password1"

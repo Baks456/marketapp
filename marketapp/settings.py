@@ -109,9 +109,9 @@ DATABASES = {
 # REDIS редиска для кеширования
 CACHES = {
     "default": {
-        # "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        # "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        # "LOCATION": "redis://127.0.0.1:6379",
     }
 }
 
@@ -168,9 +168,10 @@ LOGOUT_REDIRECT_URL = 'baseitems:home'
 LOGIN_URL = 'users:login'
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',
     "django.contrib.auth.backends.ModelBackend",
     "users.authentication.EmailAuthBackend",
-    'social_core.backends.github.GithubOAuth2',
+
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -210,6 +211,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
     'users.pipeline.new_users_handler',
+
 )
 
 SITE_ID = 1

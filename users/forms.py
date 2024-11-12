@@ -1,5 +1,7 @@
+from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
+
 
 
 class UserLoginForm(AuthenticationForm):
@@ -29,6 +31,9 @@ class RegisterUserForm(UserCreationForm):
 
 
 class UserUpdateForm(UserChangeForm):
+    username = forms.CharField(disabled=True)
+    email = forms.EmailField(disabled=True)
+
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'last_name', 'first_name', 'photo', 'phone_number')
@@ -44,3 +49,9 @@ class UserUpdateForm(UserChangeForm):
     #     if get_user_model().objects.filter(username=username).exists():
     #         raise forms.ValidationError('Данное имя пользователя занято')
     #     return username
+
+class UserPasswordChangeForm(PasswordChangeForm):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('old_password', 'new_password1', 'new_password2')

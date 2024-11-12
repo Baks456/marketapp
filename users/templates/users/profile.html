@@ -35,27 +35,28 @@
                                            accept="image/*">
 
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="id_firstName" class="form-label">Имя*</label>
-                                    <input type="text" class="form-control" id="id_firstName" name="first_name"
-                                           value="{{ user.first_name }}" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="id_lastName" class="form-label">Фамилия*</label>
-                                    <input type="text" class="form-control" id="id_lastName" name="last_name"
-                                           value="{{ user.last_name }}" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3">
                                     <label for="id_username" class="form-label">Имя пользователя*</label>
                                     <input type="text" class="form-control" id="id_username" name="username"
-                                           value="{{ user.username }}" required>
+                                           value="{{ user.username }}" disabled>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="id_email" class="form-label">Email*</label>
                                     <input type="email" class="form-control" id="id_email" name="email"
                                            value="{{ user.email }}"
-                                           required>
+                                          disabled>
                                 </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="id_firstName" class="form-label">Имя*</label>
+                                    <input type="text" class="form-control" id="id_firstName" name="first_name"
+                                           value="{{ user.first_name }}" >
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="id_lastName" class="form-label">Фамилия*</label>
+                                    <input type="text" class="form-control" id="id_lastName" name="last_name"
+                                           value="{{ user.last_name }}">
+                                </div>
+
                                 <div class="col-md-12 mb-3">
                                     <label for="id_phone_number" class="form-label">Номер телефона</label>
                                     <input type="phone_numberl" class="form-control" id="id_phone_number"
@@ -65,7 +66,11 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-dark">Сохранить</button>
+                        {% if not perms.users.social_auth %}
+                        <a class="btn btn-dark" role="button" aria-disabled="true" href="{% url 'users:password_change' %}">Сменить пароль</a>
+                        {% endif %}
                         </form>
+
                         {% if form.errors %}
                             <div class="alert alert-danger alert-dismissible fade show">
                                 {% for error in form.errors.as_data.values %}
