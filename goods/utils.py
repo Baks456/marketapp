@@ -17,6 +17,7 @@ def q_search(query):
         bodyline=SearchHeadline('description', que, start_sel='<span style="background-color:yellow;">',
                                 stop_sel='</span>'), )
     return result
+
     # keywords = [i for i in query.split() if len(i)>2]
     # q_obj = Q()
     #

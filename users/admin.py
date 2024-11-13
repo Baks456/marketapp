@@ -7,7 +7,7 @@ from users.models import User
 
 
 # Register your models here.
-# admin.site.register(User, UserAdmin)
+
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
@@ -15,3 +15,6 @@ class UserAdmin(UserAdmin):
     search_fields = ('username', 'email', 'first_name', 'last_name')
     list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
     inlines = [CartTabAdmin, OrderTabulareAdmin]
+
+
+# admin.site.register(User, UserAdmin)

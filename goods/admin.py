@@ -7,9 +7,6 @@ from goods.models import Categories, Products
 # Register your models here.
 
 
-# admin.site.register(Categories)
-# admin.site.register(Products)
-
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
@@ -31,3 +28,7 @@ class ProductsAdmin(admin.ModelAdmin):
         if product.image:
             return mark_safe(f"<img src='{product.image.url}' width=300px>")
         return f'Нет фото'
+
+
+# admin.site.register(Categories)
+# admin.site.register(Products)

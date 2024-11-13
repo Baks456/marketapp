@@ -34,7 +34,7 @@ class LoginUser(SuccessMessageMixin, LoginView):
         user = form.get_user()
         if user:
             auth.login(self.request, user)
-            old_carts = UserCart.objects.filter(user=user)
+            # old_carts = UserCart.objects.filter(user=user)
             # if old_carts.exists():
             #     old_carts.delete()
             UserCart.objects.filter(session_key=session_key).update(user=user)

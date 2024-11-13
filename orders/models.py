@@ -34,7 +34,7 @@ class Order(models.Model):
     delivery_address = models.TextField(null=True, blank=True, verbose_name="Адрес доставки")
     payment_on_delivery = models.BooleanField(default=False, verbose_name="Оплата при получении")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
-    status = models.CharField(max_length=20, choices=DeliveryStatus, default='10', verbose_name='Статус заказа')
+    status = models.CharField(max_length=40, choices=DeliveryStatus, default='10', verbose_name='Статус заказа')
 
     class Meta:
         verbose_name = "Заказ"
