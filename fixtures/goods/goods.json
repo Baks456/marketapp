@@ -95,7 +95,7 @@
       "image": "goods_images/2024/10/30/ASUS_Zenbook_15_OLED_2.png",
       "price": "1200.00",
       "discount": "0.00",
-      "quantity": 7,
+      "quantity": 47,
       "category": 3
     }
   },
@@ -109,7 +109,7 @@
       "image": "goods_images/2024/10/30/ROG_Strix_GeForce_RTX_4080_GDDR6X_h732.png",
       "price": "2000.00",
       "discount": "0.00",
-      "quantity": 17,
+      "quantity": 15,
       "category": 1
     }
   },
@@ -123,7 +123,7 @@
       "image": "goods_images/2024/10/30/ROG_Strix_GeForce_RTX_4090_24GB_GDDR6X_White_OC_Edition_2.png",
       "price": "3000.00",
       "discount": "11.00",
-      "quantity": 6,
+      "quantity": 15,
       "category": 1
     }
   },
@@ -179,7 +179,7 @@
       "image": "goods_images/2024/10/30/ROG_Swift_OLED_PG48UQ_h525.png",
       "price": "2000.00",
       "discount": "7.00",
-      "quantity": 7,
+      "quantity": 36,
       "category": 5
     }
   },
@@ -193,7 +193,7 @@
       "image": "goods_images/2024/10/30/ROG_Strix_Go_2.4_1.png",
       "price": "3000.00",
       "discount": "12.00",
-      "quantity": 3,
+      "quantity": 15,
       "category": 4
     }
   },
@@ -234,8 +234,8 @@
       "description": "Монитор Samsung Essential S3 S31C [LS24C312EAIXCI] с диагональю 24\" оснащен мощной LCD-матрицей с разрешением 1920х1080 пикселей. Формат монитора – 16:9. Матрица, собранная по технологии IPS, имеет скорость отклика 5 миллисекунд, что обеспечивает высокую четкость передаваемого изображения, а также визуальное расширение углов обзора рабочей области. Уровень матричной контрастности в статике – 1000:1. Установленная LED-подсветка имеет возможность индивидуальной регулировки. Делается это при помощи кнопок в передней части корпуса. Матовый экран избавляет от бликов, что делает работу за компьютером гораздо комфортнее.",
       "image": "goods_images/2024/10/30/24_Монитор_Samsung_Essential_S3_S31C_черный.png.webp",
       "price": "120.00",
-      "discount": "0.00",
-      "quantity": 12,
+      "discount": "6.00",
+      "quantity": 40,
       "category": 5
     }
   },
@@ -249,7 +249,7 @@
       "image": "goods_images/2024/10/30/MONTECH_METAL_DT24_BASE.png",
       "price": "75.00",
       "discount": "10.00",
-      "quantity": 23,
+      "quantity": 22,
       "category": 6
     }
   },
@@ -333,7 +333,7 @@
       "image": "goods_images/2024/10/30/16_Ноутбук_HONOR_MagicBook_X_16_2024_Born-F5651C_серый.jpg.webp",
       "price": "680.00",
       "discount": "0.00",
-      "quantity": 8,
+      "quantity": 28,
       "category": 3
     }
   },
@@ -347,7 +347,7 @@
       "image": "goods_images/2024/10/30/16_Ноутбук_ASUS_ROG_Zephyrus_16_GU605MU-QR055_серый.jpg.webp",
       "price": "1600.00",
       "discount": "0.00",
-      "quantity": 7,
+      "quantity": 27,
       "category": 3
     }
   }

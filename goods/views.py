@@ -50,6 +50,7 @@ class CatalogPageView(ListView):
             goods = goods.order_by(order)
         return goods
 
+
 def search(request, cat_slug=None):
     page = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)
@@ -84,7 +85,6 @@ def search(request, cat_slug=None):
 #     return render(request, 'goods/product.html', context)
 
 
-
 # def catalog(request, cat_slug=None):
 #     page = request.GET.get('page', 1)
 #     on_sale = request.GET.get('on_sale', None)
@@ -107,5 +107,3 @@ def search(request, cat_slug=None):
 #         'cat_slug': cat_slug,
 #     }
 #     return render(request, 'goods/catalog.html', context)
-
-

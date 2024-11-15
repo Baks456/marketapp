@@ -29,6 +29,5 @@ class ProductsAdmin(admin.ModelAdmin):
             return mark_safe(f"<img src='{product.image.url}' width=300px>")
         return f'Нет фото'
 
-
 # admin.site.register(Categories)
 # admin.site.register(Products)

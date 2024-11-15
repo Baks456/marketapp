@@ -46,8 +46,20 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     template_name = 'users/registration.html'
     form_class = RegisterUserForm
     extra_context = {'title': 'Регистрация'}
-    success_url = reverse_lazy('users:profile')
+    success_url = reverse_lazy('catalog:catalog', kwargs={'cat_slug': 'all'})
     success_message = 'Аккаунт зарегистрирован'
+
+    def form_valid(self, form):
+        session_key = self.request.session.session_key
+        user = form.instance
+
+        if user:
+            form.save()
+            auth.login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            if session_key:
+                UserCart.objects.filter(session_key=session_key).update(user=user)
+
+            return HttpResponseRedirect(self.success_url)
 
 
 @method_decorator(login_required, name="dispatch")

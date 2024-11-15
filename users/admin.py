@@ -16,5 +16,4 @@ class UserAdmin(UserAdmin):
     list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
     inlines = [CartTabAdmin, OrderTabulareAdmin]
 
-
 # admin.site.register(User, UserAdmin)
